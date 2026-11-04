@@ -1,0 +1,8 @@
+node_modules
+.next
+.env*.local
+next-env.d.ts
+*.tsbuildinfo
+# Os PDFs nunca vão para o repositório nem para o banco: só o texto extraído.
+provas/**/*.pdf
+.mongo-data

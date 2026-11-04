@@ -1,0 +1,9 @@
+{
+  "name": "EstudaAI",
+  "short_name": "EstudaAI",
+  "start_url": "/prova",
+  "display": "standalone",
+  "background_color": "#f3f2f2",
+  "theme_color": "#ec3013",
+  "lang": "pt-BR"
+}
