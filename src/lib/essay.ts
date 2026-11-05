@@ -6,6 +6,26 @@ export type Comps = Record<'c1' | 'c2' | 'c3' | 'c4' | 'c5', number>;
 export interface Theme { axis: string; title: string; texts: string[]; words: string[] }
 export interface Analysis { spans: Span[]; competencias: Comps; source: 'ia' | 'local' }
 
+
+export const TEMPLATES: Record<string, string> = {
+  FULL: `Na obra [repertório sociocultural], observa-se [relação clara entre o repertório e o tema]. Entretanto, essa realidade ainda se faz presente no Brasil, uma vez que [tema da redação] constitui um desafio para a sociedade brasileira. Nesse sentido, destacam-se [causa 1] e [causa 2] como fatores que perpetuam esse cenário.
+
+Em primeiro lugar, é necessário destacar [causa 1] como um dos principais entraves à resolução do problema. Isso ocorre porque [explique como e por que esse fator contribui para o problema]. Sob essa perspectiva, [pensador/dado/fato histórico pertinente] evidencia que [explique a relação entre o repertório e o tema]. Dessa forma, [consequência para a sociedade].
+
+Além disso, [causa 2] intensifica esse problema no Brasil. Isso se deve ao fato de que [explique o funcionamento desse fator e sua relação com o tema]. Nesse contexto, [segundo repertório pertinente] permite compreender que [conecte claramente com a discussão]. Consequentemente, [impactos sociais], o que reforça a necessidade de medidas para enfrentar a questão.
+
+Portanto, é fundamental combater [problema]. Para isso, [agente] deve [ação concreta], por meio de [meio de execução], a fim de [finalidade]. Ademais, [detalhamento], com o objetivo de garantir [resultado esperado]. Assim, será possível minimizar os impactos de [problema] e promover uma sociedade mais [justa/inclusiva/consciente].`,
+
+  INTRO: `Na obra [repertório sociocultural], observa-se [relação clara entre o repertório e o tema]. Entretanto, essa realidade ainda se faz presente no Brasil, uma vez que [tema da redação] constitui um desafio para a sociedade brasileira. Nesse sentido, destacam-se [causa 1] e [causa 2] como fatores que perpetuam esse cenário.`,
+
+  DEV: `Em primeiro lugar, é necessário destacar [causa 1] como um dos principais entraves à resolução do problema. Isso ocorre porque [explique como e por que esse fator contribui para o problema]. Sob essa perspectiva, [pensador/dado/fato histórico pertinente] evidencia que [explique a relação entre o repertório e o tema]. Dessa forma, [consequência para a sociedade].
+
+Além disso, [causa 2] intensifica esse problema no Brasil. Isso se deve ao fato de que [explique o funcionamento desse fator e sua relação com o tema]. Nesse contexto, [segundo repertório pertinente] permite compreender que [conecte claramente com a discussão]. Consequentemente, [impactos sociais], o que reforça a necessidade de medidas para enfrentar a questão.`,
+
+  CONC: `Portanto, é fundamental combater [problema]. Para isso, [agente] deve [ação concreta], por meio de [meio de execução], a fim de [finalidade]. Ademais, [detalhamento], com o objetivo de garantir [resultado esperado]. Assim, será possível minimizar os impactos de [problema] e promover uma sociedade mais [justa/inclusiva/consciente].`,
+};
+
+
 export const KINDS: Record<SpanKind, string> = {
   erro: 'Erro', meio: 'Parcial', certo: 'Acerto', ortografia: 'Ortografia', sinonimo: 'Sinônimo', repeticao: 'Repetição', coesao: 'Coesão', sentido: 'Sentido',
 };
@@ -18,12 +38,36 @@ export const MODES: Record<string, { label: string; min: number; model: string; 
 };
 
 export const THEMES: Theme[] = [
-  { axis: 'Tecnologia', title: 'Desafios para a inclusão digital da população idosa no Brasil', texts: ['Serviços bancários e públicos migram cada vez mais para aplicativos.', 'Pessoas com 60 anos ou mais são o grupo que menos usa a internet no país (IBGE).'], words: ['idoso', 'digital', 'tecnologia', 'inclusão', 'internet', 'aplicativo', 'autonomia'] },
-  { axis: 'Saúde', title: 'Caminhos para combater o estigma associado às doenças mentais na sociedade brasileira', texts: ['A OMS estima que o Brasil é o país com maior prevalência de ansiedade no mundo.', 'O preconceito afasta pessoas do tratamento.'], words: ['saúde mental', 'estigma', 'preconceito', 'tratamento', 'ansiedade', 'depressão', 'doença'] },
-  { axis: 'Meio ambiente', title: 'Desafios para a valorização de comunidades e povos tradicionais no Brasil', texts: ['Povos tradicionais preservam biomas e saberes.', 'Conflitos fundiários ameaçam esses territórios.'], words: ['comunidade', 'tradicional', 'indígena', 'quilombola', 'território', 'cultura', 'preservação'] },
-  { axis: 'Educação', title: 'Os impactos da desinformação nas redes sociais para a democracia brasileira', texts: ['Notícias falsas circulam mais rápido que as verdadeiras.', 'A educação midiática é apontada como resposta.'], words: ['desinformação', 'notícias falsas', 'redes sociais', 'democracia', 'informação', 'checagem', 'educação midiática'] },
-  { axis: 'Cidadania', title: 'Invisibilidade do trabalho de cuidado realizado pela mulher no Brasil', texts: ['Mulheres dedicam quase o dobro de horas semanais a tarefas domésticas e de cuidado.', 'Esse trabalho não é remunerado nem contabilizado no PIB.'], words: ['mulher', 'cuidado', 'trabalho', 'doméstico', 'desigualdade', 'gênero', 'invisibilidade'] },
-  { axis: 'Segurança', title: 'Desafios para o enfrentamento da violência contra a mulher no Brasil', texts: ['A Lei Maria da Penha completou mais de 15 anos.', 'Muitos casos ainda não são denunciados.'], words: ['violência', 'mulher', 'denúncia', 'Maria da Penha', 'feminicídio', 'proteção', 'machismo'] },
+  { axis: 'Tecnologia', title: 'Desafios para a inclusão digital da população idosa no Brasil', texts: [
+    'Bancos, órgãos públicos e serviços de saúde concentram cada vez mais o atendimento em aplicativos e sites, o que faz do acesso digital uma condição para exercer direitos básicos.',
+    'Pesquisas do IBGE indicam que as pessoas com 60 anos ou mais formam o grupo etário com menor uso da internet no país.',
+    'O Estatuto da Pessoa Idosa assegura prioridade na efetivação de direitos como saúde, educação e cidadania. Na prática, muitos idosos dependem de familiares para tarefas digitais simples e ficam expostos a golpes.',
+  ], words: ['idoso', 'digital', 'tecnologia', 'inclusão', 'internet', 'aplicativo', 'autonomia'] },
+  { axis: 'Saúde', title: 'Caminhos para combater o estigma associado às doenças mentais na sociedade brasileira', texts: [
+    'A Organização Mundial da Saúde define saúde como o completo bem-estar físico, mental e social, e não apenas a ausência de doença.',
+    'O preconceito leva muitas pessoas a esconder o sofrimento psíquico e a adiar a busca por tratamento, o que agrava os quadros.',
+    'No Brasil, o atendimento em saúde mental ocorre principalmente pelo SUS, por meio dos Centros de Atenção Psicossocial (CAPS), mas a oferta é desigual entre as regiões.',
+  ], words: ['saúde mental', 'estigma', 'preconceito', 'tratamento', 'ansiedade', 'depressão', 'doença'] },
+  { axis: 'Meio ambiente', title: 'Desafios para a valorização de comunidades e povos tradicionais no Brasil', texts: [
+    'A Constituição de 1988 reconhece aos povos indígenas direitos originários sobre as terras que tradicionalmente ocupam e garante a titulação das terras quilombolas.',
+    'Indígenas, quilombolas, ribeirinhos e extrativistas preservam saberes sobre o manejo da terra e das águas e ajudam a conter o desmatamento nos territórios que ocupam.',
+    'Conflitos fundiários, invasões e a demora na demarcação de territórios ameaçam o modo de vida dessas comunidades.',
+  ], words: ['comunidade', 'tradicional', 'indígena', 'quilombola', 'território', 'cultura', 'preservação'] },
+  { axis: 'Educação', title: 'Os impactos da desinformação nas redes sociais para a democracia brasileira', texts: [
+    'Estudos sobre redes sociais mostram que conteúdos falsos, por apelarem à emoção, costumam ser compartilhados com grande rapidez.',
+    'A educação midiática, que ensina a checar fontes e a interpretar criticamente as informações, é apontada como uma das respostas ao problema.',
+    'A Constituição garante a liberdade de expressão, mas o debate público depende de informações confiáveis para que o eleitor decida de forma consciente.',
+  ], words: ['desinformação', 'notícias falsas', 'redes sociais', 'democracia', 'informação', 'checagem', 'educação midiática'] },
+  { axis: 'Cidadania', title: 'Invisibilidade do trabalho de cuidado realizado pela mulher no Brasil', texts: [
+    'Dados do IBGE mostram que as mulheres dedicam, em média, mais horas por semana que os homens aos afazeres domésticos e ao cuidado de pessoas.',
+    'Esse trabalho, em geral não remunerado, sustenta a economia, mas não aparece nas contas do PIB.',
+    'A sobrecarga reduz o tempo da mulher para estudo, descanso e trabalho remunerado, o que aprofunda desigualdades de renda e de gênero.',
+  ], words: ['mulher', 'cuidado', 'trabalho', 'doméstico', 'desigualdade', 'gênero', 'invisibilidade'] },
+  { axis: 'Segurança', title: 'Desafios para o enfrentamento da violência contra a mulher no Brasil', texts: [
+    'A Lei Maria da Penha (Lei nº 11.340/2006) criou mecanismos para coibir a violência doméstica e familiar contra a mulher.',
+    'A Lei do Feminicídio (Lei nº 13.104/2015) passou a tratar o assassinato de mulheres por razões de gênero como qualificadora do homicídio.',
+    'Mesmo com a legislação, muitas vítimas não denunciam por medo, dependência econômica ou descrença nas instituições.',
+  ], words: ['violência', 'mulher', 'denúncia', 'Maria da Penha', 'feminicídio', 'proteção', 'machismo'] },
 ];
 
 // ---------- corretor local ----------
@@ -115,8 +159,13 @@ export function quotesToSpans(text: string, items: (Omit<Span, 'start' | 'end'> 
 export function mapSpans(spans: Span[], before: string, after: string): Span[] {
   let p = 0; while (p < before.length && p < after.length && before[p] === after[p]) p++;
   let s = 0; while (s < before.length - p && s < after.length - p && before[before.length - 1 - s] === after[after.length - 1 - s]) s++;
-  const endOld = before.length - s, delta = after.length - before.length;
-  return spans.flatMap(sp => (sp.end <= p ? [sp] : sp.start >= endOld ? [{ ...sp, start: sp.start + delta, end: sp.end + delta }] : []));
+  const endOld = before.length - s, endNew = after.length - s, delta = after.length - before.length;
+  return spans.flatMap(sp => {
+    if (sp.end <= p) return [sp];
+    if (sp.start >= endOld) return [{ ...sp, start: sp.start + delta, end: sp.end + delta }];
+    const start = Math.min(sp.start, p), end = sp.end >= endOld ? sp.end + delta : endNew;
+    return end > start ? [{ ...sp, start, end, replace: undefined }] : [];
+  });
 }
 
 export const countWords = (t: string) => (t.match(/\p{L}+/gu) || []).length;
