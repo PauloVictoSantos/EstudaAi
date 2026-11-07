@@ -36,7 +36,7 @@ export const MODES: Record<string, { label: string; min: number; model: string; 
   DEV: { label: 'Desenvolvimento', min: 90, model: 'Em primeiro lugar, cabe destacar que a exclusão digital limita a autonomia dos idosos. Isso ocorre porque serviços essenciais migraram para aplicativos, de modo que quem não domina a tecnologia passa a depender de terceiros. Dados do IBGE confirmam que essa parcela da população é a que menos acessa a internet.', tip: ['Tópico frasal', 'Explique a causa', 'Feche com dado ou exemplo'] },
   CONC: { label: 'Conclusão', min: 60, model: 'Portanto, cabe ao Ministério da Educação, em parceria com as prefeituras, criar cursos gratuitos de letramento digital para idosos, por meio de oficinas em centros comunitários, a fim de garantir sua autonomia no acesso a serviços públicos.', tip: ['Agente + ação', 'Meio/modo', 'Finalidade e detalhamento'] },
 };
-export const NEW_THEMES: Theme[] = [
+export const THEMES: Theme[] = [
   // ===== TECNOLOGIA (12) =====
   { axis: 'Tecnologia', title: 'Os vieses raciais dos sistemas de reconhecimento facial no Brasil', texts: [
     'Sistemas de reconhecimento facial vêm sendo adotados por polícias e empresas para identificar pessoas em tempo real.',
